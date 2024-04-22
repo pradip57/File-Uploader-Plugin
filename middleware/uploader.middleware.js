@@ -22,7 +22,7 @@ const myStorage = multer.diskStorage({
   //to make the filename unique
   filename: (req, file, cb) => {
     //for file extension
-    const ext = file.filename.split(".").pop();
+    const ext = file.originalname.split(".").pop();
 
     const filename = Date.now() + "-" + generateRandomString(20) + "." + ext;
     cb(null, filename);
@@ -30,7 +30,7 @@ const myStorage = multer.diskStorage({
 });
 
 const imageFilter = (req, file, cb) => {
-  const ext = file.filename.split(".").pop();
+  const ext = file.originalname.split(".").pop();
   const allowed = ["jpg", "jpeg", "png", "svg", "webp", "gif", "bmp"];
   if (allowed.includes(ext.toLowerCase())) {
     cb(null, true);
